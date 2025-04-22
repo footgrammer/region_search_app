@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:region_search_app/data/model/location.dart';
+import 'package:region_search_app/pages/home/home_view_model.dart';
 import 'package:region_search_app/pages/home/widgets/home_card.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   @override
-  State<StatefulWidget> createState() {
+  ConsumerState<HomePage> createState() {
     return _HomePageState();
   }
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   TextEditingController textController = TextEditingController();
+
+  void search(String text) {
+    ref.read(homeViewModelProvider.notifier).searchLocations(text);
+  }
 
   @override
   void dispose() {
@@ -19,22 +26,25 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    HomeState homeState = ref.watch(homeViewModelProvider);
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: Scaffold(appBar: getAppBar(), body: getListView()),
+      child: Scaffold(appBar: getAppBar(), body: getListView(homeState)),
     );
   }
 
-  ListView getListView() {
+  ListView getListView(HomeState homeState) {
     return ListView.builder(
-      itemCount: 10,
+      itemCount: homeState.locations?.length ?? 0,
       itemBuilder: (context, index) {
+        Location location = homeState.locations![index];
         return HomeCard(
-          title: 'title',
-          category: 'category',
-          roadAddress: 'roadAddress',
+          title: location.title,
+          category: location.category,
+          roadAddress: location.roadAddress,
         );
       },
     );
@@ -64,7 +74,9 @@ class _HomePageState extends State<HomePage> {
       ),
       actions: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            search(textController.text);
+          },
           child: Container(
             width: 50,
             height: 50,
@@ -74,9 +86,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
-  }
-
-  void search(String text) {
-    print(text);
   }
 }
