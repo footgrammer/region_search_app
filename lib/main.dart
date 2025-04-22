@@ -15,6 +15,10 @@ class MyApp extends StatelessWidget {
       title: '지역 검색 앱',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        scaffoldBackgroundColor: Color.fromARGB(255, 253, 240, 255),
+        appBarTheme: AppBarTheme(
+          backgroundColor: const Color.fromARGB(255, 253, 240, 255),
+        ),
       ),
       home: HomePage(),
     );
