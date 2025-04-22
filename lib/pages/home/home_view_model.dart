@@ -15,7 +15,8 @@ class HomeViewModel extends Notifier<HomeState> {
 
   Future<void> searchLocations(String query) async {
     final locationRepository = LocationRepository();
-    state = HomeState(locations: await locationRepository.search(query));
+    var locations = await locationRepository.search(query);
+    state = HomeState(locations: locations);
   }
 }
 
