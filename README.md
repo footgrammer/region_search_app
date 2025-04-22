@@ -1,16 +1,53 @@
-# region_search_app
+# 지역 검색 앱 만들기
 
-A new Flutter project.
+## 📖 목차
 
-## Getting Started
+1. **프로젝트 소개**
 
-This project is a starting point for a Flutter application.
+- 본 프로젝트는 flutter 숙련주차 개인과제로 Open API를 활용해서 지역검색 기능을 구현하는 프로젝트이다.
 
-A few resources to get you started if this is your first Flutter project:
+2. **주요기능**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+   - Naver 검색 Open API 활용
+   - Riverpod을 활용한 MVVM 구조
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3. **개발기간**
+
+- 2025년 4월 18일 - 2025년 4월 22일
+
+4. **기술스택**
+
+- Flutter
+
+5. **프로젝트 파일 구조**
+
+```jsx
+lib/
+│
+├── main.dart
+│
+├── data/
+│   ├── dto/
+│   │   │
+│   │   ├── location_response_dto.dart
+│   ├── model/
+│   │   │
+│   │   ├── location.dart
+│   ├── repository/
+│   │   │
+│   │   ├── location_repository.dart
+├── pages/
+│   ├── detail/                    // 상세 페이지
+│   │   │
+│   │   └── detail_page.dart
+│   ├── home/                      // 홈 페이지
+│   │   ├── widgets/
+│   │   │     │
+│   │   │     ├── home_card.dart
+│   │   ├── home.dart
+│   │   │
+│   │   └── home_view_model.dart
+
+```
+
+---
