@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class HomeCard extends StatelessWidget {
   String title;
@@ -25,17 +26,19 @@ class HomeCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: titleStyle()),
+            Html(
+              data: title,
+              style: {
+                "*": Style(fontSize: FontSize(20), fontWeight: FontWeight.bold),
+                "body": Style(margin: Margins.zero, padding: HtmlPaddings.zero),
+              },
+            ),
             Text(category, style: categoryStyle()),
             Text(roadAddress, style: addressStyle()),
           ],
         ),
       ),
     );
-  }
-
-  TextStyle titleStyle() {
-    return TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
   }
 
   TextStyle categoryStyle() {
