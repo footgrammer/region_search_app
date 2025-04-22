@@ -44,17 +44,33 @@ class _HomePageState extends ConsumerState<HomePage> {
         Location location = homeState.locations![index];
         return GestureDetector(
           onTap: () {
-            print(location.link);
-
-            //터치를 하면 DetailPage로 이동
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return DetailPage('https://www.naver.com');
-                },
-              ),
-            );
+            //link가 http로 시작하면
+            if (location.link.startsWith('https')) {
+              //터치를 하면 DetailPage로 이동
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return DetailPage(location.link);
+                  },
+                ),
+              );
+            } else {
+              showDialog(
+                context: context,
+                builder:
+                    (context) => AlertDialog(
+                      title: Text('알림'),
+                      content: Text('https로 시작하는 링크가 아닙니다.'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context), // 닫기
+                          child: Text('확인'),
+                        ),
+                      ],
+                    ),
+              );
+            }
           },
           child: HomeCard(
             title: location.title,
