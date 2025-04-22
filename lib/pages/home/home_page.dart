@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:region_search_app/data/model/location.dart';
+import 'package:region_search_app/pages/detail/detail_page.dart';
 import 'package:region_search_app/pages/home/home_view_model.dart';
 import 'package:region_search_app/pages/home/widgets/home_card.dart';
 
@@ -41,10 +42,25 @@ class _HomePageState extends ConsumerState<HomePage> {
       itemCount: homeState.locations?.length ?? 0,
       itemBuilder: (context, index) {
         Location location = homeState.locations![index];
-        return HomeCard(
-          title: location.title,
-          category: location.category,
-          roadAddress: location.roadAddress,
+        return GestureDetector(
+          onTap: () {
+            print(location.link);
+
+            //터치를 하면 DetailPage로 이동
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return DetailPage('https://www.naver.com');
+                },
+              ),
+            );
+          },
+          child: HomeCard(
+            title: location.title,
+            category: location.category,
+            roadAddress: location.roadAddress,
+          ),
         );
       },
     );
